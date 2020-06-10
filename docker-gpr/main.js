@@ -4,6 +4,7 @@ const core = require("@actions/core");
 async function run() {
   const token = core.getInput("repo-token");
   const dockerfileLocation = core.getInput("dockerfile-location");
+  const dockerfileName = core.getInput("dockerfile-name");
   const username = process.env.GITHUB_ACTOR;
   const imageName = core.getInput("image-name").toLowerCase();
   const githubRepo = process.env.GITHUB_REPOSITORY.toLowerCase();
@@ -18,7 +19,7 @@ async function run() {
   }
   try {
     await exec.exec(
-      `docker build -t ${fullImageReference} ${dockerfileLocation}`
+      `docker build -t ${fullImageReference} -f ${dockerfileName} ${dockerfileLocation}`
     );
   } catch (err) {
     core.setFailed(`action failed with error: ${err}`);

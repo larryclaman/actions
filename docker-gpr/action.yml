@@ -13,6 +13,10 @@ inputs:
     description: Where in the repo the Dockerfile is located
     default: .
     required: false
+  dockerfile-name:
+    description: name of Dockerfile
+    default: Dockerfile
+    required: false
   tag:
     description: tag for Docker image
     default: ${{ github.sha }}
